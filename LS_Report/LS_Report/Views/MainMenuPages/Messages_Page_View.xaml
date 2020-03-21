@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+
+            xmlns:MessageViews="clr-namespace:LS_Report.Views.Messages_Views"
+             mc:Ignorable="d"
+            BarBackgroundColor="#275db5"
+             x:Class="LS_Report.Views.MainMenuPages.Messages_Page_View">
+    <TabbedPage.Children>
+        <MessageViews:RecevedMessage_View Title="Reçu" />
+        <MessageViews:SentMessage_View Title="Envoyés" />
+    </TabbedPage.Children>
+</TabbedPage>

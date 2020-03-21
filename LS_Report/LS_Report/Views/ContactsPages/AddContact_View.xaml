@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:CustomEntry="clr-namespace:LS_Report.Custom_Controls"
+             xmlns:Behaviors="clr-namespace:LS_Report.Behaviors"
+             xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+             xmlns:syncfusion="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:Converters="clr-namespace:LS_Report.Converters"
+             mc:Ignorable="d"
+             x:Class="LS_Report.Views.ContactsPages.AddContact_View">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:TypeArguments="x:String" x:Key="NormalFont">
+                <On Platform="Android" Value="VarelaRound-Regular.ttf#Open Sans" />
+            </OnPlatform>
+            <Converters:ReversBoolConverter x:Key="ReversBool" />
+            <Converters:GpsStatusConverter x:Key="GpsStatus" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView>
+        <Grid Margin="10,10,10,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Text="Etablissement" Grid.Row="0" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <CustomEntry:CustomEntry  Grid.Row="0" IsEnabled="{Binding IsBusy , Converter={StaticResource ReversBool}}" Text="{Binding Contact.company ,Mode=OneWayToSource}" Grid.Column="1"  FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
+
+            <Label Text="Nom*" Grid.Row="1" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <CustomEntry:CustomEntry Grid.Row="1" Grid.Column="1" IsEnabled="{Binding IsBusy , Converter={StaticResource ReversBool}}" Text="{Binding Contact.lastname ,Mode=OneWayToSource}"  FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
+            <Label Text="Prénom*" Grid.Row="2" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <CustomEntry:CustomEntry Grid.Row="2" IsEnabled="{Binding IsBusy , Converter={StaticResource ReversBool}}"  Grid.Column="1" Text="{Binding Contact.firstname ,Mode=OneWayToSource}" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
+            <syncfusion:SfRadioGroup IsEnabled="{Binding IsBusy , Converter={StaticResource ReversBool}}" Orientation="Horizontal" Grid.Row="3" Grid.Column="0">
+                <syncfusion:SfRadioButton x:Name="Male_RadioButton" IsChecked="{Binding Male_Cheked}" Text="Homme" CheckedColor="#275db5" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" />
+                <syncfusion:SfRadioButton x:Name="Female_RadioButton" IsChecked="{Binding Femele_Cheked}" Text="Femme" CheckedColor="#275db5" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" />
+            </syncfusion:SfRadioGroup>
+            <Label Text="Age" Grid.Row="4" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <combobox:SfComboBox DataSource="{Binding Age}" IsEnabled="{Binding IsBusy , Converter={StaticResource ReversBool}}"  ShowBorder="False" SelectedItem="{Binding Contact.age ,Mode=OneWayToSource}" FontFamily="{StaticResource NormalFont}" TextSize="15" Grid.Row="4" Grid.Column="1" />
+            <Label Text="Wilaya*" Grid.Row="5" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <combobox:SfComboBox SelectedItem="{Binding Selected_Wilaya}" SelectedValue="{Binding Contact.wilaya , Mode=OneWayToSource}" DisplayMemberPath="nom" DataSource="{Binding Wilaya}" IsEnabled="{Binding IsBusy , Converter={StaticResource ReversBool}}"  ShowBorder="False"  FontFamily="{StaticResource NormalFont}" TextSize="15" Grid.Row="5" Grid.Column="1" />
+            <Label Text="Commune*" Grid.Row="6" Grid.Column="0"  FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <combobox:SfComboBox DataSource="{Binding Commune}" SelectedValue="{Binding Contact.city , Mode=OneWayToSource}" DisplayMemberPath="nom" IsEnabled="{Binding IsBusy , Converter={StaticResource ReversBool}}"  ShowBorder="False"  FontFamily="{StaticResource NormalFont}" TextSize="15" Grid.Row="6" Grid.Column="1" />
+            <Label Text="Address*" Grid.Row="7" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <CustomEntry:CustomEntry IsEnabled="{Binding IsBusy , Converter={StaticResource ReversBool}}" Grid.Row="7" Text="{Binding Contact.address ,Mode=OneWayToSource}"  Grid.Column="1"  FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
+            <Label Text="Profession*"  Grid.Row="8" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <combobox:SfComboBox DataSource="{Binding Professions}" IsEnabled="{Binding IsBusy , Converter={StaticResource ReversBool}}"  ShowBorder="False" SelectedValue="{Binding Contact.business_type ,Mode=OneWayToSource}" SelectedItem="{Binding Selected_Profession}" FontFamily="{StaticResource NormalFont}" TextSize="15" Grid.Row="8" Grid.Column="1" />
+            <Label Text="Spécialité*"  IsVisible="{Binding IsVisible}" Grid.Row="9" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <combobox:SfComboBox DataSource="{Binding Speciality}" SelectedItem="{Binding Selected_Speciality}" IsVisible="{Binding IsVisible}" IsEnabled="{Binding IsBusy , Converter={StaticResource ReversBool}}"  ShowBorder="False" SelectedValue="{Binding Contact.speciality ,Mode=OneWayToSource}" FontFamily="{StaticResource NormalFont}" TextSize="15" Grid.Row="9" Grid.Column="1" />
+            <Label Text="Secteur*" Grid.Row="10" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <combobox:SfComboBox DataSource="{Binding Sector}" IsEnabled="{Binding IsBusy , Converter={StaticResource ReversBool}}"  ShowBorder="False" SelectedValue="{Binding Contact.sector ,Mode=OneWayToSource}" FontFamily="{StaticResource NormalFont}" TextSize="15" Grid.Row="10" Grid.Column="1" />
+            <Label Text="E-Mail" Grid.Row="11" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <CustomEntry:CustomEntry IsEnabled="{Binding IsBusy , Converter={StaticResource ReversBool}}" Grid.Row="11"   Grid.Column="1" Text="{Binding Contact.email ,Mode=OneWayToSource}"  FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
+            <Label Text="Telephone Mobile" Grid.Row="12" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <CustomEntry:CustomEntry IsEnabled="{Binding IsBusy , Converter={StaticResource ReversBool}}" Grid.Row="12" Text="{Binding Contact.phone ,Mode=OneWayToSource}" Keyboard="Numeric" Grid.Column="1"   FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200">
+                <CustomEntry:CustomEntry.Behaviors>
+                    <Behaviors:NumericValidationBehavior />
+                </CustomEntry:CustomEntry.Behaviors>
+            </CustomEntry:CustomEntry>
+            <Label Text="Telephone Fix" Grid.Row="13" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <CustomEntry:CustomEntry IsEnabled="{Binding IsBusy , Converter={StaticResource ReversBool}}" Grid.Row="13" Keyboard="Numeric" Grid.Column="1" Text="{Binding Contact.landline ,Mode=OneWayToSource}"  FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200">
+                <CustomEntry:CustomEntry.Behaviors>
+                    <Behaviors:NumericValidationBehavior />
+                </CustomEntry:CustomEntry.Behaviors>
+            </CustomEntry:CustomEntry>
+            <Label Text="Fax" Grid.Row="14" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <CustomEntry:CustomEntry IsEnabled="{Binding IsBusy , Converter={StaticResource ReversBool}}" Grid.Row="14" Keyboard="Numeric" Grid.Column="1" Text="{Binding Contact.fax ,Mode=OneWayToSource}"  FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200">
+                <CustomEntry:CustomEntry.Behaviors>
+                    <Behaviors:NumericValidationBehavior />
+                </CustomEntry:CustomEntry.Behaviors>
+            </CustomEntry:CustomEntry>
+            <Label Text="Potentiel*" Grid.Row="15" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <combobox:SfComboBox DataSource="{Binding Potentiel}" IsEnabled="{Binding IsBusy , Converter={StaticResource ReversBool}}"  ShowBorder="False" SelectedItem="{Binding Selected_Potential}" FontFamily="{StaticResource NormalFont}" TextSize="15" Grid.Row="15" Grid.Column="1" />
+            <Label Text="Prescription*" Grid.Row="16" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <combobox:SfComboBox DataSource="{Binding Types_f}" IsEnabled="{Binding IsBusy , Converter={StaticResource ReversBool}}"  ShowBorder="False" SelectedValue="{Binding Contact.prescription ,Mode=OneWayToSource}" FontFamily="{StaticResource NormalFont}" TextSize="15" Grid.Row="16" Grid.Column="1" />
+            <Label Text="Emplacement*" Grid.Row="17" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <combobox:SfComboBox DataSource="{Binding Types_m}" IsEnabled="{Binding IsBusy , Converter={StaticResource ReversBool}}"  ShowBorder="False" SelectedValue="{Binding Contact.placement ,Mode=OneWayToSource}" FontFamily="{StaticResource NormalFont}" TextSize="15" Grid.Row="17" Grid.Column="1" />
+            <Label Text="Aspect Locaux*" Grid.Row="18" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <combobox:SfComboBox DataSource="{Binding Types_m}" IsEnabled="{Binding IsBusy , Converter={StaticResource ReversBool}}"  ShowBorder="False" SelectedValue="{Binding Contact.local_appearance ,Mode=OneWayToSource}" FontFamily="{StaticResource NormalFont}" TextSize="15" Grid.Row="18" Grid.Column="1" />
+            <ImageButton IsVisible="{Binding IsBusy , Converter={StaticResource ReversBool}}" Source="camera.png" Padding="15" BackgroundColor="#275db5"  Grid.Row="19" Grid.Column="0" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="Start"  HeightRequest="50" WidthRequest="50" Command="{Binding TakePictureCommand}" />
+            <Frame IsVisible="{Binding IsBusy , Converter={StaticResource ReversBool}}" Grid.Row="19" Grid.Column="1" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" BorderColor="LightGray" CornerRadius="10" Padding="0" HeightRequest="50" WidthRequest="50" HasShadow="False">
+                <Image Source="{Binding PicturePath}" Aspect="AspectFill">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding PictureTappedCommand}" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </Frame>
+
+            <Label Text="Position*" Grid.Row="20" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <CustomEntry:CustomEntry Grid.Row="20" Grid.Column="1" Text="{Binding Position}" IsEnabled="False" FontFamily="{StaticResource NormalFont}" FontSize="13" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
+            <Image IsVisible="{Binding IsBusy , Converter={StaticResource ReversBool}}" Source="{Binding Position , Converter={StaticResource GpsStatus}}" Grid.Row="20" HeightRequest="25" WidthRequest="25" Grid.Column="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GetPositionCommand}" />
+                </Image.GestureRecognizers>
+            </Image>
+            <ActivityIndicator Grid.Row="20" Grid.Column="0" Color="#275db5"  VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"  HeightRequest="25" WidthRequest="25" />
+            <ImageButton IsVisible="{Binding IsBusy , Converter={StaticResource ReversBool}}" Source="plus.png" Padding="25" BackgroundColor="#275db5"  Grid.Row="21" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"  HeightRequest="70" WidthRequest="70" Command="{Binding AddContactCommand}" />
+        </Grid>
+    </ScrollView>
+</ContentPage>

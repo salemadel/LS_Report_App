@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="LS_Report.Views.VisitesPages.ContactHistory_View">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:TypeArguments="x:String" x:Key="NormalFont">
+                <On Platform="Android" Value="VarelaRound-Regular.ttf#Open Sans" />
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="BoldFont">
+                <On Platform="Android" Value="OpenSans-ExtraBold.ttf#Open Sans" />
+            </OnPlatform>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView>
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="150" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackLayout Grid.Row="0" BackgroundColor="Default">
+                <Label Text="{Binding Contact_Name}" FontSize="30" Margin="10,10,10,10" FontFamily="{StaticResource BoldFont}" FontAttributes="Bold" TextColor="#275db5" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" />
+            </StackLayout>
+
+            <Grid Grid.Row="1" Margin="5,0,5,0" IsVisible="{Binding HasHistory}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="75" />
+                    <RowDefinition Height="75" />
+                    <RowDefinition Height="75" />
+                    <RowDefinition Height="75" />
+                    <RowDefinition Height="160" />
+                    <RowDefinition Height="160" />
+                    <RowDefinition Height="75" />
+                    <RowDefinition Height="75" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <StackLayout Grid.Row="0" Grid.Column="0" IsVisible="{Binding IsFreeMission}">
+                    <Label Text="Date de visite" Grid.Row="4" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                    <Label Text="{Binding Contact.created_at ,  StringFormat='{0:dd/MM/yyyy}'}" TextColor="Black"   FontFamily="{StaticResource NormalFont}" FontSize="17" />
+                </StackLayout>
+                <StackLayout Grid.Row="1" Grid.Column="0" IsVisible="{Binding IsFreeMission}">
+                    <Label Text="Catégorie" Grid.Row="4" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                    <Label Text="{Binding Contact.category}" TextColor="Black"   FontFamily="{StaticResource NormalFont}" FontSize="17" />
+                </StackLayout>
+
+                <StackLayout Grid.Row="1" Grid.Column="1">
+                    <Label Text="Temps attente" Grid.Row="4" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                    <Label Text="{Binding Contact.waiting_time}"  TextColor="Black"  FontFamily="{StaticResource NormalFont}" FontSize="17" />
+                </StackLayout>
+                <StackLayout Grid.Row="2" Grid.Column="0">
+                    <Label Text="Durée visite" Grid.Row="4" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                    <Label Text="{Binding Contact.duration}"  TextColor="Black"  FontFamily="{StaticResource NormalFont}" FontSize="17" />
+                </StackLayout>
+                <StackLayout Grid.Row="2" Grid.Column="1">
+                    <Label Text="Qualité visite" Grid.Row="4" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                    <Label Text="{Binding Contact.visit_quality}" TextColor="Black"   FontFamily="{StaticResource NormalFont}" FontSize="17" />
+                </StackLayout>
+                <StackLayout Grid.Row="3" Grid.Column="0">
+                    <Label Text="Réceptivité" Grid.Row="4" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                    <Label Text="{Binding Contact.receptivity}"  TextColor="Black"  FontFamily="{StaticResource NormalFont}" FontSize="17" />
+                </StackLayout>
+
+                <StackLayout Grid.Row="3" Grid.Column="1">
+                    <Label Text="Personne Visité" Grid.Row="4" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                    <Label Text="{Binding Contact.authority}" TextColor="Black"   FontFamily="{StaticResource NormalFont}" FontSize="17" />
+                </StackLayout>
+
+                <StackLayout Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
+                    <Label Text="Commentaires de la personne visitée" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                    <Label FontFamily="{StaticResource NormalFont}" Text="{Binding Contact.client_note}" TextColor="Black" FontSize="Default" VerticalOptions="FillAndExpand" />
+                </StackLayout>
+                <StackLayout Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2">
+                    <Label Text="Commentaires délégué(e)" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                    <Label FontFamily="{StaticResource NormalFont}" Text="{Binding Contact.agent_note}" TextColor="Black" FontSize="Default" VerticalOptions="FillAndExpand" />
+                </StackLayout>
+                <StackLayout Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2">
+                    <Label Text="Produit Présenter :" FontFamily="{StaticResource NormalFont}" FontSize="17" />
+                    <ImageButton  CornerRadius="20" HeightRequest="50"   BackgroundColor="#275db5"   VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  Source="next.png"  Padding="10" Command="{Binding PresentedProductsListCommand}" />
+                </StackLayout>
+                <Frame Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="EndAndExpand"  HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsBusy}" HeightRequest="45" WidthRequest="45" CornerRadius="50" Padding="0" BackgroundColor="White" Margin="0,0,0,10">
+                    <ActivityIndicator  Color="#275db5"  VerticalOptions="CenterAndExpand"  HorizontalOptions="CenterAndExpand" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HeightRequest="40" WidthRequest="40" />
+                </Frame>
+            </Grid>
+        </Grid>
+    </ScrollView>
+</ContentPage>

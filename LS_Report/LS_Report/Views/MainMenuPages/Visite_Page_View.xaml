@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Custom="clr-namespace:LS_Report.Custom_Controls"
+             xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+             mc:Ignorable="d"
+             x:Class="LS_Report.Views.MainMenuPages.Visite_Page_View">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:TypeArguments="x:String" x:Key="NormalFont">
+                <On Platform="Android" Value="VarelaRound-Regular.ttf#Open Sans" />
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="BoldFont">
+                <On Platform="Android" Value="OpenSans-ExtraBold.ttf#Open Sans" />
+            </OnPlatform>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView>
+        <AbsoluteLayout Padding="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid RowSpacing="0" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="150" />
+                    <RowDefinition Height="75" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <StackLayout Grid.Row="0" BackgroundColor="Default">
+                    <Label Text="Tournée." FontSize="30" Margin="10,10,10,10" FontFamily="{StaticResource BoldFont}" FontAttributes="Bold" TextColor="#275db5" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" />
+                </StackLayout>
+                <StackLayout Grid.Row="1" BackgroundColor="Default" />
+                <Grid Grid.Row="1" Grid.RowSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Custom:CustomFrame Grid.Row="0" Grid.Column="0" Padding="1" HasShadow="True" BorderColor="Transparent" HeightRequest="150" WidthRequest="150" CornerRadius="10" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                        <StackLayout Margin="20,20,20,20">
+                            <Image Source="add.png" HorizontalOptions="Start" VerticalOptions="StartAndExpand" HeightRequest="40" WidthRequest="40" />
+                            <Label Text="Ajouter Visite" FontSize="18" FontFamily="{StaticResource NormalFont}" FontAttributes="Bold" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="Start" />
+                        </StackLayout>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding AddVisiteCommand}" />
+                        </Frame.GestureRecognizers>
+                    </Custom:CustomFrame>
+                    <Custom:CustomFrame Grid.Row="0" Grid.Column="1" Padding="1" HasShadow="True" BorderColor="Transparent" HeightRequest="150" WidthRequest="150" CornerRadius="10" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                        <StackLayout Margin="20,20,20,20">
+                            <Image Source="list.png" HorizontalOptions="Start" VerticalOptions="StartAndExpand" HeightRequest="40" WidthRequest="40" />
+                            <Label Text="Liste Des Visites" FontSize="18" FontFamily="{StaticResource NormalFont}" FontAttributes="Bold" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="Start" />
+                        </StackLayout>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding HistoryCommand}" />
+                        </Frame.GestureRecognizers>
+                    </Custom:CustomFrame>
+                    <Custom:CustomFrame Grid.Row="1" Grid.Column="0" Padding="1" HasShadow="True" BorderColor="Transparent" HeightRequest="150" WidthRequest="150" CornerRadius="10" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                        <StackLayout Margin="20,20,20,20">
+                            <Image Source="sport.png" HorizontalOptions="Start" VerticalOptions="StartAndExpand" HeightRequest="40" WidthRequest="40" />
+                            <Label Text="Plans De Tournée" FontSize="18" FontFamily="{StaticResource NormalFont}" FontAttributes="Bold" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="Start" />
+                        </StackLayout>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer />
+                        </Frame.GestureRecognizers>
+                    </Custom:CustomFrame>
+                    <Custom:CustomFrame Grid.Row="1" Grid.Column="1" Padding="1" HasShadow="True" BorderColor="Transparent" HeightRequest="150" WidthRequest="150" CornerRadius="10" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                        <StackLayout Margin="20,20,20,20">
+                            <Image Source="close.png" HorizontalOptions="Start" VerticalOptions="StartAndExpand" HeightRequest="40" WidthRequest="40" />
+                            <Label Text="Autre Activité" FontSize="18" FontFamily="{StaticResource NormalFont}" FontAttributes="Bold" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="Start" />
+                        </StackLayout>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding PopUpCommand}" />
+                        </Frame.GestureRecognizers>
+                    </Custom:CustomFrame>
+                    <Custom:CustomFrame Grid.Row="2" Grid.Column="0" Padding="1" HasShadow="True" BorderColor="Transparent" HeightRequest="150" WidthRequest="150" CornerRadius="10" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                        <StackLayout Margin="20,20,20,20">
+                            <Image Source="meds.png" HorizontalOptions="Start" VerticalOptions="StartAndExpand" HeightRequest="40" WidthRequest="40" />
+                            <Label Text="Liste Des Produits" FontSize="18" FontFamily="{StaticResource NormalFont}" FontAttributes="Bold" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="Start" />
+                        </StackLayout>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ProductsListCommand}" />
+                        </Frame.GestureRecognizers>
+                    </Custom:CustomFrame>
+                    <Custom:CustomFrame Grid.Row="2" Grid.Column="1" Padding="1" HasShadow="True" BorderColor="Transparent" HeightRequest="150" WidthRequest="150" CornerRadius="10" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                        <StackLayout Margin="20,20,20,20">
+                            <Image Source="price.png" HorizontalOptions="Start" VerticalOptions="StartAndExpand" HeightRequest="40" WidthRequest="40" />
+                            <Label Text="Note De Frais" FontSize="18" FontFamily="{StaticResource NormalFont}" FontAttributes="Bold" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="Start" />
+                        </StackLayout>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer />
+                        </Frame.GestureRecognizers>
+                    </Custom:CustomFrame>
+                    <Frame Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="EndAndExpand"  HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsBusy}" HeightRequest="45" WidthRequest="45" CornerRadius="50" Padding="0" BackgroundColor="White" Margin="0,0,0,10">
+                        <ActivityIndicator  Color="#275db5"  VerticalOptions="CenterAndExpand"  HorizontalOptions="CenterAndExpand" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HeightRequest="40" WidthRequest="40" />
+                    </Frame>
+                </Grid>
+            </Grid>
+            <ContentView x:Name="popupLoginView" BackgroundColor="#C0808080" Padding="10, 0"  IsVisible="{Binding PopUpVisible}" AbsoluteLayout.LayoutBounds="0, 0, 1, 1" AbsoluteLayout.LayoutFlags="All">
+                <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                    <Frame Padding="0" CornerRadius="20">
+                        <StackLayout Orientation="Vertical" HeightRequest="250" WidthRequest="350" BackgroundColor="White">
+                            <Label Text="Séléctionner le Motif" Margin="5,3,3,3" TextColor="Black" Grid.Row="0"  FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                            <combobox:SfComboBox DataSource="{Binding Abscence_List}" SelectedItem="{Binding Selected_Item}" ShowBorder="False"  FontFamily="{StaticResource NormalFont}" TextSize="17" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+                            <StackLayout Orientation="Horizontal" Spacing="1">
+                                <Button Text="Annuler" FontSize="13" BackgroundColor="Transparent" TextColor="#275db5" FontFamily="{StaticResource NormalFont}" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand" Command="{Binding PopUpCommand}" />
+                                <Button Text="OK" FontSize="13" BackgroundColor="Transparent" TextColor="#275db5" FontFamily="{StaticResource NormalFont}" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand" Command="{Binding AbsenceCommand}" />
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </ContentView>
+        </AbsoluteLayout>
+    </ScrollView>
+</ContentPage>

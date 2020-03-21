@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Behaviors="clr-namespace:LS_Report.Behaviors"
+             xmlns:Converters="clr-namespace:LS_Report.Converters"
+             xmlns:syncfusion="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             mc:Ignorable="d"
+             x:Class="LS_Report.Views.VisitesPages.Focus_View">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:TypeArguments="x:String" x:Key="NormalFont">
+                <On Platform="Android" Value="VarelaRound-Regular.ttf#Open Sans" />
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="BoldFont">
+                <On Platform="Android" Value="OpenSans-ExtraBold.ttf#Open Sans" />
+            </OnPlatform>
+            <Converters:ItemTappedEventArgsConverter x:Key="ItemTappedConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150" />
+            <RowDefinition Height="60" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackLayout Grid.Row="0" BackgroundColor="Default">
+            <Label Text="Focus." FontSize="30" Margin="10,10,10,10" FontFamily="{StaticResource BoldFont}" FontAttributes="Bold" TextColor="#275db5" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" />
+        </StackLayout>
+        <ImageButton HeightRequest="40" Grid.Row="1" Padding="10" IsVisible="{Binding IsVisible}" WidthRequest="40" Source="closew.png" BackgroundColor="#275db5" CornerRadius="40" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="0,0,10,0" Command="{Binding DeleteContactCommand}" />
+        <ListView Grid.Row="2" ItemsSource="{Binding Contacts}"  SelectedItem="{Binding Selected_Item}"  HasUnevenRows="True" SeparatorColor="LightGray" Margin="5,0,0,0"   CachingStrategy ="RecycleElement">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell Height="90">
+                        <Grid Margin="0,5,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Grid.Column="0" BackgroundColor="#275db5" />
+                            <StackLayout Grid.Column="1" Margin="10,5,0,2">
+                                <Label  Text="{Binding Name}" FontSize="17" FontFamily="{StaticResource NormalFont}" FontAttributes="Bold" TextColor="Black" VerticalOptions="CenterAndExpand" VerticalTextAlignment="Center" />
+                                <Label  Text="{Binding Speciality}" FontSize="13" FontFamily="{StaticResource NormalFont}" FontAttributes="Bold" TextColor="Black" VerticalOptions="CenterAndExpand" VerticalTextAlignment="Center" />
+                                <Label  Text="{Binding Address}" FontSize="13" FontFamily="{StaticResource NormalFont}" FontAttributes="Bold" TextColor="Black" VerticalOptions="CenterAndExpand" VerticalTextAlignment="Center" />
+                            </StackLayout>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.Behaviors>
+                <Behaviors:EventToCommandBehavior EventName="ItemTapped" EventArgsConverter="{StaticResource ItemTappedConverter}" Command="{Binding ItemTappedCommand}" />
+            </ListView.Behaviors>
+        </ListView>
+        <syncfusion:SfButton Grid.Row="2"  CornerRadius="20" HeightRequest="50" ShowIcon="True"  BackgroundColor="#275db5" Text="Ajouter Contact" FontFamily="{StaticResource NormalFont}" FontSize="18" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" VerticalOptions="EndAndExpand" HorizontalOptions="EndAndExpand" TextColor="White" ImageSource="plus.png"  ImageAlignment="Right" Command="{Binding AddContactCommand}" />
+        <syncfusion:SfButton Grid.Row="2"  CornerRadius="20" HeightRequest="50" ShowIcon="True"  BackgroundColor="#275db5" Text="Ajouter Rapport" FontFamily="{StaticResource NormalFont}" FontSize="18" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" VerticalOptions="EndAndExpand" HorizontalOptions="StartAndExpand" TextColor="White" ImageSource="next.png" ImageAlignment="Right" Command="{Binding AddReportCommand}" />
+    </Grid>
+</ContentPage>

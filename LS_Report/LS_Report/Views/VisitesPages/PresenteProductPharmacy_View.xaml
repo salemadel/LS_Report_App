@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:syncfusion="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+             xmlns:CustomEntry="clr-namespace:LS_Report.Custom_Controls"
+             xmlns:Behaviors="clr-namespace:LS_Report.Behaviors"
+             mc:Ignorable="d"
+             x:Class="LS_Report.Views.VisitesPages.PresenteProductPharmacy_View">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:TypeArguments="x:String" x:Key="NormalFont">
+                <On Platform="Android" Value="VarelaRound-Regular.ttf#Open Sans" />
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="BoldFont">
+                <On Platform="Android" Value="OpenSans-ExtraBold.ttf#Open Sans" />
+            </OnPlatform>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView>
+        <Grid Margin="5,0,5,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Label Text="Disponibile ?" Grid.Row="0" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <syncfusion:SfRadioGroup Grid.Row="0" Grid.Column="1"  Orientation="Horizontal">
+                <syncfusion:SfRadioButton x:Name="Male_RadioButton" IsChecked="{Binding Availabel}" Text="Oui" CheckedColor="#275db5" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" />
+                <syncfusion:SfRadioButton x:Name="Female_RadioButton" IsChecked="{Binding Not_Availabel}" Text="Non" CheckedColor="#275db5" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" />
+            </syncfusion:SfRadioGroup>
+            <Label Text="Pourquoi non disponible ?" Grid.Row="1" Grid.Column="0" IsEnabled="{Binding Not_Availabel}" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <combobox:SfComboBox DataSource="{Binding Uvailability_reasons}" IsEnabled="{Binding Not_Availabel}" ShowBorder="False" SelectedItem="{Binding Selected_Unvailibility}" FontFamily="{StaticResource NormalFont}" TextSize="15" Grid.Row="1" Grid.Column="1" />
+            <Label Text="Pourquoi refus ?" Grid.Row="2" Grid.Column="0" IsEnabled="{Binding Refusal_Visible}" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <combobox:SfComboBox DataSource="{Binding Refusal_reasons}" IsEnabled="{Binding Refusal_Visible}" ShowBorder="False" SelectedItem="{Binding Selected_Refusal}" FontFamily="{StaticResource NormalFont}" TextSize="15" Grid.Row="2" Grid.Column="1" />
+            <Label Text="Rotation" Grid.Row="3" Grid.Column="0" IsEnabled="{Binding Rotation_Visible}"  FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <combobox:SfComboBox DataSource="{Binding Rotation}" IsEnabled="{Binding Rotation_Visible}" ShowBorder="False" SelectedItem="{Binding Selected_Rotation}" FontFamily="{StaticResource NormalFont}" TextSize="15" Grid.Row="3" Grid.Column="1" />
+            <Label Text="Renouvellement commande ?" Grid.Row="4" Grid.Column="0" IsEnabled="{Binding No_Interssed_List_Visible}"  FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <combobox:SfComboBox DataSource="{Binding Reorder}"  ShowBorder="False" SelectedItem="{Binding Selected_Reorder}" FontFamily="{StaticResource NormalFont}" TextSize="15" Grid.Row="4" Grid.Column="1" />
+            <Label Text="Etat de stock" Grid.Row="5" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <CustomEntry:CustomEntry  Grid.Row="5" Text="{Binding Stock}"  Keyboard="Numeric" Grid.Column="1"   FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200">
+                <CustomEntry:CustomEntry.Behaviors>
+                    <Behaviors:NumericValidationBehavior />
+                </CustomEntry:CustomEntry.Behaviors>
+            </CustomEntry:CustomEntry>
+            <ImageButton  Source="plus.png" Padding="25" BackgroundColor="#275db5"  Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"  HeightRequest="70" WidthRequest="70" Command="{Binding AddPresentePorodctCommand}" />
+        </Grid>
+    </ScrollView>
+</ContentPage>

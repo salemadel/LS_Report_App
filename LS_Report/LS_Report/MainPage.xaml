@@ -1,0 +1,15 @@
+﻿<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LS_Report.MainPage"
+             xmlns:home="clr-namespace:LS_Report.Views.MainMenuPages"
+             xmlns:plugin="clr-namespace:Plugin.Badge.Abstractions;assembly=Plugin.Badge.Abstractions"
+             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.ToolbarPlacement="Bottom"
+            android:TabbedPage.BarSelectedItemColor="#275db5">
+
+    <home:Visite_Page_View IconImageSource="todo.png" />
+    <home:Contact_Page_View IconImageSource="contact.png" />
+    <home:Sync_Page_View IconImageSource="ui.png" plugin:TabBadge.BadgeColor="Red" plugin:TabBadge.BadgePosition="PositionTopRight" plugin:TabBadge.BadgeText="{Binding Sync_Number}" />
+    <home:Messages_Page_View IconImageSource="mail.png" />
+    <home:Profil_Page_View IconImageSource="user.png" />
+</TabbedPage>

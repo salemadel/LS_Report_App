@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+             xmlns:CustomEntry="clr-namespace:LS_Report.Custom_Controls"
+             xmlns:Converters="clr-namespace:LS_Report.Converters"
+             xmlns:syncfusion="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             mc:Ignorable="d"
+             x:Class="LS_Report.Views.VisitesPages.Visite_View">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:TypeArguments="x:String" x:Key="NormalFont">
+                <On Platform="Android" Value="VarelaRound-Regular.ttf#Open Sans" />
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="BoldFont">
+                <On Platform="Android" Value="OpenSans-ExtraBold.ttf#Open Sans" />
+            </OnPlatform>
+        </ResourceDictionary>
+        <Converters:ListViewHeightConverter x:Key="HeightConverter" />
+    </ContentPage.Resources>
+    <ScrollView>
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="150" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackLayout Grid.Row="0" BackgroundColor="Default">
+                <Label Text="{Binding VisiteType}" FontSize="30" Margin="10,10,10,10" FontFamily="{StaticResource BoldFont}" FontAttributes="Bold" TextColor="#275db5" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" />
+            </StackLayout>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <StackLayout Orientation="Horizontal" Grid.Row="0">
+                    <ImageButton  CornerRadius="20" HeightRequest="50"   BackgroundColor="#275db5"   VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"  Source="plus.png"  Padding="10" Command="{Binding PresenteProductCommand}" />
+                    <ImageButton  CornerRadius="20" HeightRequest="50"   BackgroundColor="#275db5"  VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"  Source="question.png" Padding="10" Command="{Binding QuestionnaireCommand}" />
+                    <ImageButton  CornerRadius="20" HeightRequest="50"   BackgroundColor="#275db5"   VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"  Source="cart.png" Padding="10" />
+                </StackLayout>
+                <Grid Grid.Row="1" Margin="5,0,5,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="75" />
+                        <RowDefinition Height="75" />
+                        <RowDefinition Height="75" />
+                        <RowDefinition Height="75" />
+                        <RowDefinition Height="75" />
+                        <RowDefinition Height="75" />
+                        <RowDefinition Height="160" />
+                        <RowDefinition Height="160" />
+                        <RowDefinition Height="75" />
+                        <RowDefinition Height="75" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <StackLayout Grid.Row="0" Grid.Column="0">
+                        <Label Text="Visite en Duo ?*" Grid.Row="4" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                        <CheckBox IsChecked="{Binding Visite_Duo}" Color="#275db5" />
+                    </StackLayout>
+                    <StackLayout Grid.Row="1" Grid.Column="0" IsVisible="{Binding IsFreeMission}">
+                        <Label Text="Catégorie*" Grid.Row="4" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                        <combobox:SfComboBox DataSource="{Binding Categorie}" SelectedItem="{Binding Selected_Categorie}" ShowBorder="False"  FontFamily="{StaticResource NormalFont}" TextSize="17" />
+                    </StackLayout>
+                    <StackLayout Grid.Row="0" Grid.Column="1">
+                        <Label Text="Superviseur" Grid.Row="4" IsEnabled="{Binding Visite_Duo}" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                        <combobox:SfComboBox IsEnabled="{Binding Visite_Duo}" DataSource="{Binding Supercisors_List}" SelectedItem="{Binding Selected_Supervisor}" DisplayMemberPath="Name"  FontFamily="{StaticResource NormalFont}" ShowBorder="False" TextSize="17" />
+                    </StackLayout>
+                    <StackLayout Grid.Row="1" Grid.Column="1">
+                        <Label Text="Temps attente*" Grid.Row="4" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                        <combobox:SfComboBox DataSource="{Binding Wait_Time}" SelectedItem="{Binding Selected_Wait_Time}" FontFamily="{StaticResource NormalFont}" ShowBorder="False" TextSize="17" />
+                    </StackLayout>
+                    <StackLayout Grid.Row="2" Grid.Column="0">
+                        <Label Text="Durée visite*" Grid.Row="4" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                        <combobox:SfComboBox DataSource="{Binding Duration}" SelectedItem="{Binding Selected_Duration}"  FontFamily="{StaticResource NormalFont}" ShowBorder="False" TextSize="17" />
+                    </StackLayout>
+                    <StackLayout Grid.Row="2" Grid.Column="1">
+                        <Label Text="Qualité visite*" Grid.Row="4" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                        <combobox:SfComboBox DataSource="{Binding Quality}" SelectedItem="{Binding Selected_Quality}" FontFamily="{StaticResource NormalFont}" ShowBorder="False" TextSize="17" />
+                    </StackLayout>
+                    <StackLayout Grid.Row="3" Grid.Column="0">
+                        <Label Text="Réceptivité*" Grid.Row="4" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                        <combobox:SfComboBox DataSource="{Binding Quality}" SelectedItem="{Binding Selected_Receptivity}"  FontFamily="{StaticResource NormalFont}" ShowBorder="False" TextSize="17" />
+                    </StackLayout>
+                    <StackLayout Grid.Row="4" Grid.Column="0">
+                        <Label Text="Matériel remis*" Grid.Row="4" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                        <syncfusion:SfRadioGroup Grid.Row="0" Grid.Column="1"  Orientation="Horizontal">
+                            <syncfusion:SfRadioButton x:Name="Male_RadioButton" IsChecked="{Binding Material_Delivred}" Text="Oui" CheckedColor="#275db5" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" />
+                            <syncfusion:SfRadioButton x:Name="Female_RadioButton"  Text="Non" CheckedColor="#275db5" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" />
+                        </syncfusion:SfRadioGroup>
+                    </StackLayout>
+                    <StackLayout Grid.Row="3" Grid.Column="1">
+                        <Label Text="Personne Visité*" Grid.Row="4" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                        <combobox:SfComboBox DataSource="{Binding Authority}" SelectedItem="{Binding Selected_Authority}" FontFamily="{StaticResource NormalFont}" ShowBorder="False" TextSize="17" />
+                    </StackLayout>
+                    <StackLayout Grid.Row="4" Grid.Column="1">
+                        <Label Text="Matériel remis*" Grid.Row="4" Grid.Column="0" IsEnabled="{Binding Material_Delivred}" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                        <combobox:SfComboBox x:Name="Material_Combobox" DataSource="{Binding Products_to_Deliver}" MultiSelectMode="Token" ClearButtonColor="Red" IsSelectedItemsVisibleInDropDown="False"  DisplayMemberPath="name"  FontFamily="{StaticResource NormalFont}" IsEnabled="{Binding Material_Delivred}" ShowBorder="False" TextSize="17" SelectionChanged="SfComboBox_SelectionChanged" />
+                    </StackLayout>
+                    <StackLayout Grid.Row="5" Grid.Column="0">
+                        <Label Text="Quantité"  FontSize="17" IsEnabled="{Binding Material_Delivred}" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                        <CustomEntry:CustomEntry  Grid.Row="0" Text="{Binding Material_Delivred_Quantity}" IsEnabled="{Binding Material_Delivred}" Placeholder="Ex : 2;5"  FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
+                    </StackLayout>
+                    <StackLayout Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2">
+                        <Label Text="Commentaires de la personne visitée" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                        <CustomEntry:CustomEditor FontFamily="{StaticResource NormalFont}" Text="{Binding VisitedPerson_Note}" TextColor="Black" FontSize="Default" VerticalOptions="FillAndExpand" />
+                    </StackLayout>
+                    <StackLayout Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2">
+                        <Label Text="Commentaires délégué(e)" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                        <CustomEntry:CustomEditor FontFamily="{StaticResource NormalFont}" Text="{Binding Agent_Note}" TextColor="Black" FontSize="Default" VerticalOptions="FillAndExpand" />
+                    </StackLayout>
+                    <StackLayout Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2">
+                        <Label Text="Produit Présenter :" FontFamily="{StaticResource NormalFont}" FontSize="17" />
+                        <ImageButton  CornerRadius="20" HeightRequest="50"   BackgroundColor="#275db5"   VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  Source="next.png"  Padding="10" Command="{Binding PresentedProductsListCommand}" />
+                    </StackLayout>
+                    <Frame Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="EndAndExpand"  HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsBusy}" HeightRequest="45" WidthRequest="45" CornerRadius="50" Padding="0" BackgroundColor="White" Margin="0,0,0,10">
+                        <ActivityIndicator  Color="#275db5"  VerticalOptions="CenterAndExpand"  HorizontalOptions="CenterAndExpand" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HeightRequest="40" WidthRequest="40" />
+                    </Frame>
+                    <ImageButton Source="plus.png" Padding="25" BackgroundColor="#275db5"  Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"  HeightRequest="70" WidthRequest="70" Command="{Binding AddVisiteCommand}" />
+                </Grid>
+            </Grid>
+        </Grid>
+    </ScrollView>
+</ContentPage>
