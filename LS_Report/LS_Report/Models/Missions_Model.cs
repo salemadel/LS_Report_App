@@ -32,7 +32,6 @@ namespace LS_Report.Models
 
     public class Missions_VM
     {
-       
         public bool mission_completed { get; set; }
         public string _id { get; set; }
         public string title { get; set; }
@@ -45,7 +44,7 @@ namespace LS_Report.Models
 
         public Missions_VM()
         {
-           // questionnaires = new List<Questionnaire>();
+            // questionnaires = new List<Questionnaire>();
             clients = new List<Client>();
         }
     }
@@ -85,7 +84,6 @@ namespace LS_Report.Models
         public string local_appearance { get; set; } = "";
         public string avatar { get; set; }
 
-       
         public ImageSource Avatar
         {
             get
@@ -162,8 +160,6 @@ namespace LS_Report.Models
             }
         }
 
-       
-
         public string address { get; set; }
         public string city { get; set; }
         public string wilaya { get; set; }
@@ -193,19 +189,18 @@ namespace LS_Report.Models
 
     public class Questionnaire
     {
-        
     }
+
     public class Potential
     {
         public string network { get; set; }
         public string value { get; set; }
     }
+
     public class Location
     {
         public double?[] coordinates { get; set; }
 
         public string type { get; set; }
     }
-
-    
 }

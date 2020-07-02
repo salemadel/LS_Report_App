@@ -93,12 +93,10 @@ namespace LS_Report.Services
                                     DataStore.AddData(data);
                                     DataStore.DeleteContactToUpdate(contact.Id);
                                 }
-                                
                             }
                             else
                             {
                                 DataStore.UpdateContactToUpload(contact.Id, Result.Item2);
-                                
                             }
                         }
                         MessagingCenter.Send(this, "ContactsSyncUpdated");
@@ -129,18 +127,15 @@ namespace LS_Report.Services
                                     var json = JsonConvert.SerializeObject(Contacts_List);
                                     DataStore.UpdateData("Contacts", json);
                                     DataStore.DeleteEditContactToUpdate(contact.Id);
-                                    
                                 }
                                 catch
                                 {
                                     DataStore.UpdateEditContactToUpload(contact.Id, "Erreur Lors de Supression");
-                                    
                                 }
                             }
                             else
                             {
                                 DataStore.UpdateEditContactToUpload(contact.Id, Result.Item2);
-                                
                             }
                         }
                         MessagingCenter.Send(this, "ContactsSyncUpdated");
@@ -154,7 +149,7 @@ namespace LS_Report.Services
                         if (Result.Item1)
                         {
                             DataStore.DeleteReportToUload(report.Id);
-                            
+
                             if (report.IsFreeMission)
                             {
                             }
@@ -162,7 +157,6 @@ namespace LS_Report.Services
                         else
                         {
                             DataStore.UpdateReportToUpload(report.Id, Result.Item2);
-                            
                         }
                         MessagingCenter.Send(this, "ContactsSyncUpdated");
                     }
@@ -175,7 +169,7 @@ namespace LS_Report.Services
                         if (Result.Item1)
                         {
                             DataStore.DeleteUnvailibilityToUload(unvailibility.Id);
-                            
+
                             if (unvailibility.IsFreeMission)
                             {
                             }
@@ -183,20 +177,18 @@ namespace LS_Report.Services
                         else
                         {
                             DataStore.UpdateUnvailibilityToUpload(unvailibility.Id, Result.Item2);
-                            
                         }
                         MessagingCenter.Send(this, "ContactsSyncUpdated");
                     }
                 }
-                if(Questionnaire.Count > 0)
+                if (Questionnaire.Count > 0)
                 {
-                    foreach(var questionnaire in Questionnaire)
+                    foreach (var questionnaire in Questionnaire)
                     {
                         var Result = await RESTService.PostQuestionnaireAsync(questionnaire.Json);
-                        if(Result.Item1)
+                        if (Result.Item1)
                         {
                             DataStore.DeleteQuestionnaireToUpload(questionnaire.Id);
-                            
                         }
                         else
                         {

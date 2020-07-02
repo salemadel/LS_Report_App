@@ -49,9 +49,9 @@ namespace LS_Report.Interfaces
 
         void DeleteUnvailibilityToUload(int id);
 
-         IEnumerable<Mails_Model> GetMails();
+        IEnumerable<Mails_Model> GetMails();
 
-         void AddMails(Mails_Model data);
+        void AddMails(Mails_Model data);
 
         void UpdateMails(int id, string Json);
 

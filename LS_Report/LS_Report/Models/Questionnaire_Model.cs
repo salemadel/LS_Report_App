@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace LS_Report.Models
 {
@@ -16,6 +14,7 @@ namespace LS_Report.Models
             questions = new List<Question>();
         }
     }
+
     public class Question
     {
         public List<string> answers { get; set; }
@@ -27,17 +26,21 @@ namespace LS_Report.Models
             answers = new List<string>();
         }
     }
+
     public class Questionnaire_Responce_Model
     {
         public string client { get; set; }
         public string note { get; set; }
         public string questionnaire { get; set; }
+
         public class Questions
         {
             public string question { get; set; }
             public string answer { get; set; }
         }
+
         public List<Questions> questions { get; set; }
+
         public Questionnaire_Responce_Model()
         {
             questions = new List<Questions>();

@@ -6,14 +6,14 @@ using Newtonsoft.Json;
 using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
 using Plugin.Media;
-using Plugin.Permissions;
-using Plugin.Permissions.Abstractions;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace LS_Report.ViewModels.Contacts_ViewModels
@@ -22,7 +22,7 @@ namespace LS_Report.ViewModels.Contacts_ViewModels
     {
         private INavigation Navigation { get; set; }
         private IDataStore DataStore { get; set; }
-        private PermissionsRequest Permissions { get; set; }
+        private PermissionsRequest PermissionsRequest { get; set; }
         private string[] professions = { "Chirugien dentiste", "Médecin", "Pharmacien", "Grossiste", "Sage-femme" };
         private string[] types_m = { "Bon", "Moyen", "Mauvais" };
         private string[] types_f = { "Bonne", "Moyenne", "Mauvaise" };
@@ -204,13 +204,15 @@ namespace LS_Report.ViewModels.Contacts_ViewModels
                 OnPropertyChanged();
             }
         }
+
         private string selected_Potential { get; set; }
+
         public string Selected_Potential
         {
             get { return selected_Potential; }
             set
             {
-                if(selected_Potential != value)
+                if (selected_Potential != value)
                 {
                     selected_Potential = value;
                     Contact.potential.RemoveAll(i => i.network == Token.network);
@@ -218,6 +220,7 @@ namespace LS_Report.ViewModels.Contacts_ViewModels
                 }
             }
         }
+
         private List<string> speciality { get; set; }
 
         public List<string> Speciality
@@ -269,8 +272,10 @@ namespace LS_Report.ViewModels.Contacts_ViewModels
                 OnPropertyChanged();
             }
         }
+
         private Token_Model Token { get; set; }
-        public AddContact_ViewModel(INavigation navigation, IDataStore dataStore,Token_Model token, List<Wilaya_Model> wilayas, List<Commune> communes, List<string> speciality)
+
+        public AddContact_ViewModel(INavigation navigation, IDataStore dataStore, Token_Model token, List<Wilaya_Model> wilayas, List<Commune> communes, List<string> speciality)
         {
             Navigation = navigation;
             DataStore = dataStore;
@@ -279,7 +284,7 @@ namespace LS_Report.ViewModels.Contacts_ViewModels
             Speciality = speciality;
             All_Commune = communes;
             Token = token;
-            Permissions = new PermissionsRequest();
+            PermissionsRequest = new PermissionsRequest();
             Speciality.Remove("Tous");
             Speciality.Remove("Pharmacien");
             Speciality.Remove("Sage-femme");
@@ -311,20 +316,17 @@ namespace LS_Report.ViewModels.Contacts_ViewModels
         private async Task ExecuteOnGetPosition()
         {
             IsBusy = true;
+            var test = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
             Position position = null;
             try
             {
-                var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
+                var status = await Xamarin.Essentials.Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
                 if (status != PermissionStatus.Granted)
                 {
-                    if (await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Location))
-                    {
-                    }
+                    var results = await Xamarin.Essentials.Permissions.RequestAsync<Permissions.LocationWhenInUse>();
 
-                    var results = await CrossPermissions.Current.RequestPermissionsAsync(Permission.Location);
-
-                    if (results.ContainsKey(Permission.Location))
-                        status = results[Permission.Location];
+                    if (results == PermissionStatus.Granted)
+                        status = PermissionStatus.Granted;
                 }
                 if (status == PermissionStatus.Granted)
                 {
@@ -359,7 +361,7 @@ namespace LS_Report.ViewModels.Contacts_ViewModels
 
         private async Task ExecuteOnTakePicture()
         {
-            if (await Permissions.Check_permissions("Storage") == PermissionStatus.Granted)
+            if (await PermissionsRequest.Check_permissions("Storage") == PermissionStatus.Granted)
                 try
                 {
                     await CrossMedia.Current.Initialize();
@@ -388,7 +390,6 @@ namespace LS_Report.ViewModels.Contacts_ViewModels
 
         private async Task ExecuteOnAddContact()
         {
-           
             var props = typeof(NewContact_Model).GetProperties();
             string[] required = { "lastname", "firsname", "business_type", "sector", "placement", "sex", "local_appearance", "prescription", "wilaya", "city", "address" };
             bool valid = true;
@@ -420,7 +421,6 @@ namespace LS_Report.ViewModels.Contacts_ViewModels
             }
             if (valid)
             {
-                
                 if (await DependencyService.Get<IDialog>().AlertAsync("", "Voulez Vous Ajouter le Contact " + Contact.lastname + " " + Contact.firstname + " ?", "Oui", "Non"))
                 {
                     var json = JsonConvert.SerializeObject(Contact);
@@ -437,7 +437,6 @@ namespace LS_Report.ViewModels.Contacts_ViewModels
                     await Navigation.PopModalAsync();
                 }
             }
-            
         }
 
         private async Task ExecuteOnPictureTapped()

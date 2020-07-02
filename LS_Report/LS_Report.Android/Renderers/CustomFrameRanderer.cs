@@ -10,8 +10,6 @@ namespace LS_Report.Droid.Renderers
 {
     public class CustomFrameRanderer : FrameRenderer
     {
-        
-
         public CustomFrameRanderer(Android.Content.Context context) : base(context)
         {
         }

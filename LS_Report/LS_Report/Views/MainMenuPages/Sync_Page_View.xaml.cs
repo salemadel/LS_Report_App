@@ -1,5 +1,4 @@
 ﻿using LS_Report.Data;
-using LS_Report.Interfaces;
 using LS_Report.ViewModels.MainMenu_ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;

@@ -62,12 +62,13 @@ namespace LS_Report.ViewModels.Visites_ViewModel
                 }
             }
         }
+
         private Token_Model Token { get; set; }
         public ObservableCollection<Missions_Model> Global_Missions { get; set; }
 
         public Command ItemTappedCommand { get; set; }
 
-        public GlobalMission_ViewModel(INavigation navigation, IDataStore dataStore , Token_Model token)
+        public GlobalMission_ViewModel(INavigation navigation, IDataStore dataStore, Token_Model token)
         {
             Navigation = navigation;
             DataStore = dataStore;
@@ -167,7 +168,7 @@ namespace LS_Report.ViewModels.Visites_ViewModel
             };
             bool CanVisite = (Selected_Contact.VisiteDate.Date == DateTime.Now.Date) ? true : false;
             CanVisite = (CanVisite) ? !Selected_Contact.Visited : CanVisite;
-            await Navigation.PushModalAsync(new ContactVisite_Page(null, Contact,Token , false, CanVisite, Selected_Contact.Global_Id, Selected_Contact.Mission_Id));
+            await Navigation.PushModalAsync(new ContactVisite_Page(null, Contact, Token, false, CanVisite, Selected_Contact.Global_Id, Selected_Contact.Mission_Id));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

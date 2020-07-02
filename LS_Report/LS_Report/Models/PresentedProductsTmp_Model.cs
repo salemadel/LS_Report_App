@@ -127,6 +127,7 @@ namespace LS_Report.Models
         public string prescribed_availabel { get; set; }
         public string type { get; set; }
     }
+
     public class tmp_questionnaire
     {
         public string id_questionnaire { get; set; }

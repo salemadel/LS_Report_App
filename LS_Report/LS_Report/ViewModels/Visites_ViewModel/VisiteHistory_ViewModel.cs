@@ -112,7 +112,7 @@ namespace LS_Report.ViewModels.Visites_ViewModel
                                  select new Grouping<string, ContactVisiteHistory_Model>(contactGroup.Key, contactGroup);
                     Contacts = new ObservableCollection<Grouping<string, ContactVisiteHistory_Model>>(sorted);
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     DependencyService.Get<IMessage>().ShortAlert(e.Message);
                 }

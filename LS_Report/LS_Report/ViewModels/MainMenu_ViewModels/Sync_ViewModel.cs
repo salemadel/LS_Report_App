@@ -169,9 +169,9 @@ namespace LS_Report.ViewModels.MainMenu_ViewModels
                 }
                 Sync_Number = (Convert.ToInt32(Sync_Number) + Unvailibilitys.Count).ToString();
             }
-            if(Questionnaires.Count > 0)
+            if (Questionnaires.Count > 0)
             {
-                foreach(var data in Questionnaires)
+                foreach (var data in Questionnaires)
                 {
                     var pending = new PendingData_Model
                     {
@@ -213,7 +213,7 @@ namespace LS_Report.ViewModels.MainMenu_ViewModels
                     case "Mise a jour Contact": DataStore.DeleteEditContactToUpdate(Selected_Item.Id); break;
                     case "Ajout de Rapport": DataStore.DeleteReportToUload(Selected_Item.Id); break;
                     case "Indisponibilité": DataStore.DeleteUnvailibilityToUload(Selected_Item.Id); break;
-                    case "Questionnaire":DataStore.DeleteQuestionnaireToUpload(Selected_Item.Id);break;
+                    case "Questionnaire": DataStore.DeleteQuestionnaireToUpload(Selected_Item.Id); break;
                 }
                 Selected_Item = null;
                 OnPropertyChanged("Selected_Item");

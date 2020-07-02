@@ -48,8 +48,9 @@ namespace LS_Report.ViewModels.Contacts_ViewModels
                 }
             }
         }
+
         public string Potential { get; set; }
-       
+
         private string position { get; set; }
 
         public string Position
@@ -62,17 +63,18 @@ namespace LS_Report.ViewModels.Contacts_ViewModels
                 OnPropertyChanged();
             }
         }
+
         private Token_Model Token { get; set; }
         public Command GoToPositionCommand { get; set; }
         public Command PictureTappedCommand { get; set; }
         public Command GetHistoryCommand { get; set; }
 
-        public ContactDetail_ViewModel(INavigation navigation, Client2 contact , Token_Model token)
+        public ContactDetail_ViewModel(INavigation navigation, Client2 contact, Token_Model token)
         {
             Navigation = navigation;
             Contact = contact;
             Token = token;
-            
+
             Potential = (Contact.potential.Exists(i => i.network == Token.network)) ? Contact.potential.Single(i => i.network == Token.network).value : null;
             GoToPositionCommand = new Command(async () =>
             {

@@ -1,5 +1,4 @@
 ﻿using LS_Report.Data;
-using LS_Report.Interfaces;
 using LS_Report.Models;
 using LS_Report.ViewModels.Visites_ViewModel;
 using System;
@@ -17,7 +16,7 @@ namespace LS_Report.Views.VisitesPages
             NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
             var datastore = new DataStore();
-            BindingContext = new GlobalMission_ViewModel(Navigation , datastore,token);
+            BindingContext = new GlobalMission_ViewModel(Navigation, datastore, token);
         }
 
         private void ImageButton_Clicked(object sender, EventArgs e)

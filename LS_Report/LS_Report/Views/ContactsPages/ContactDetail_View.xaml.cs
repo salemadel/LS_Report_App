@@ -9,10 +9,10 @@ namespace LS_Report.Views.ContactsPages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ContactDetail_View : ContentPage
     {
-        public ContactDetail_View(Client2 contact , Token_Model token)
+        public ContactDetail_View(Client2 contact, Token_Model token)
         {
             InitializeComponent();
-            BindingContext = new ContactDetail_ViewModel(Navigation, contact , token);
+            BindingContext = new ContactDetail_ViewModel(Navigation, contact, token);
         }
     }
 }

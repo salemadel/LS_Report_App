@@ -29,47 +29,53 @@ namespace LS_Report.ViewModels.Visites_ViewModel
 
             foreach (var history in Contacts_List)
             {
-                if (history != null)
+                try
                 {
-                    if (history.products_presented != null && history.products_presented.Count > 0)
+                    if (history != null)
                     {
-                        if (history.client.business_type == "Médecin" || history.client.business_type == "Sage-femme" || history.client.business_type == "Chirugien-dentiste")
+                        if (history.products_presented != null && history.products_presented.Count > 0)
                         {
-                            Doctors_Number += 1;
-                            foreach (var presented in history.products_presented)
+                            if (history.client.business_type == "Médecin" || history.client.business_type == "Sage-femme" || history.client.business_type == "Chirugien-dentiste")
                             {
-                                tmp_presented_products_doctor tmp = new tmp_presented_products_doctor();
-                                tmp.product = presented.product.name;
+                                Doctors_Number += 1;
+                                foreach (var presented in history.products_presented)
+                                {
+                                    tmp_presented_products_doctor tmp = new tmp_presented_products_doctor();
+                                    tmp.product = presented.product.name;
 
-                                tmp.prescribed = presented.doctor.prescribed;
-                                tmp.no_interessed_reason = presented.doctor.no_interessed_reason;
-                                tmp.no_prescribed_reason = presented.doctor.no_prescribed_reason;
-                                tmp.prescribed_frequency = presented.doctor.prescription_frequency;
-                                tmp.samples_delivred = presented.doctor.samples;
-                                tmp.rival_product = presented.doctor.rival_product;
-                                products_Doctors.Add(tmp);
+                                    tmp.prescribed = presented.doctor.prescribed;
+                                    tmp.no_interessed_reason = presented.doctor.no_interessed_reason;
+                                    tmp.no_prescribed_reason = presented.doctor.no_prescribed_reason;
+                                    tmp.prescribed_frequency = presented.doctor.prescription_frequency;
+                                    tmp.samples_delivred = presented.doctor.samples;
+                                    tmp.rival_product = presented.doctor.rival_product;
+                                    products_Doctors.Add(tmp);
+                                }
+                            }
+                            else
+                            {
+                                Pharmacy_Number += 1;
+                                foreach (var presented in history.products_presented)
+                                {
+                                    tmp_pretented_products_pharmacy tmp = new tmp_pretented_products_pharmacy();
+                                    tmp.product = presented.product.name;
+                                    tmp.available = presented.pharmacy.available;
+                                    tmp.refusal_reason = presented.pharmacy.refusal_reason;
+                                    tmp.rival_product = presented.pharmacy.rival_product;
+                                    tmp.rotation = presented.pharmacy.rotation;
+                                    tmp.unavailability_reason = presented.pharmacy.unavailability_reason;
+                                    products_Pharmacies.Add(tmp);
+                                }
                             }
                         }
                         else
                         {
-                            Pharmacy_Number += 1;
-                            foreach (var presented in history.products_presented)
-                            {
-                                tmp_pretented_products_pharmacy tmp = new tmp_pretented_products_pharmacy();
-                                tmp.product = presented.product.name;
-                                tmp.available = presented.pharmacy.available;
-                                tmp.refusal_reason = presented.pharmacy.refusal_reason;
-                                tmp.rival_product = presented.pharmacy.rival_product;
-                                tmp.rotation = presented.pharmacy.rotation;
-                                tmp.unavailability_reason = presented.pharmacy.unavailability_reason;
-                                products_Pharmacies.Add(tmp);
-                            }
+                            return;
                         }
                     }
-                    else
-                    {
-                        return;
-                    }
+                }
+                catch
+                {
                 }
             }
 

@@ -1,8 +1,5 @@
-﻿using Android.Runtime;
-using Android.Widget;
-using LS_Report.Custom_Controls;
+﻿using LS_Report.Custom_Controls;
 using LS_Report.Droid.Renderers;
-using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
@@ -21,12 +18,8 @@ namespace LS_Report.Droid.Renderers
             base.OnElementChanged(e);
             if (e.OldElement == null)
             {
-                
                 Control.Background = null;
-                
-              
             }
         }
-       
     }
 }

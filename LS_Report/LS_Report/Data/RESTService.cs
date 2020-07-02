@@ -16,6 +16,7 @@ namespace LS_Report.Data
     public class RESTService
     {
         private readonly string ipAdress = "149.202.133.17";
+
         public async Task<(bool, string)> Login(string username, string password)
         {
             string error_msg = null;
@@ -1196,6 +1197,7 @@ namespace LS_Report.Data
             }
             return (Succes, error_msg);
         }
+
         public async Task<(bool, string)> GetQuestionnairesAsyc()
         {
             string error_msg = null;
@@ -1298,31 +1300,29 @@ namespace LS_Report.Data
             }
             return (Succes, error_msg);
         }
-        public async Task<(bool , string)> CheckVersion()
+
+        public async Task<(bool, string)> CheckVersion()
         {
             string error_msg = null;
             bool succes = false;
-          
+
             if (await Connectivity_check())
             {
                 try
                 {
-                  
-                        
-                        HttpClient client = new HttpClient();
-                       
-                        client.Timeout = TimeSpan.FromSeconds(30);
-                        var json = await client.GetStringAsync("http://" + ipAdress + "/api?version=2.0.2.0");
-                        dynamic obj = JsonConvert.DeserializeObject(json);
-                        if(obj.status == 200)
+                    HttpClient client = new HttpClient();
+
+                    client.Timeout = TimeSpan.FromSeconds(30);
+                    var json = await client.GetStringAsync("http://" + ipAdress + "/api?version=2.0.2.0");
+                    dynamic obj = JsonConvert.DeserializeObject(json);
+                    if (obj.status == 200)
                     {
                         succes = true;
                     }
-                        else
+                    else
                     {
                         error_msg = "Veuillez mettre à jour l'application avant de se connecter";
                     }
-
                 }
                 catch (Exception ex)
                 {
@@ -1336,7 +1336,7 @@ namespace LS_Report.Data
             return (succes, error_msg);
         }
 
-        public async Task<(bool, string)> GetStatsPeriode(DateTime startdate, DateTime enddate , string agent)
+        public async Task<(bool, string)> GetStatsPeriode(DateTime startdate, DateTime enddate, string agent)
         {
             string error_msg = null;
             bool Succes = false;
@@ -1398,16 +1398,16 @@ namespace LS_Report.Data
             }
             return (Succes, error_msg);
         }
+
         private async Task<bool> Connectivity_check()
         {
-             
-              var connectivity = CrossConnectivity.Current;
-              if (!connectivity.IsConnected)
-                  return false;
+            var connectivity = CrossConnectivity.Current;
+            if (!connectivity.IsConnected)
+                return false;
 
-              var reachable = await connectivity.IsRemoteReachable(ipAdress);
+            var reachable = await connectivity.IsRemoteReachable(ipAdress);
 
-              return reachable;
+            return reachable;
         }
     }
 }

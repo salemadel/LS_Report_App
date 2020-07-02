@@ -12,7 +12,7 @@ namespace LS_Report.Droid.Interfaces
     {
         public void OpenSettings()
         {
-            if(!Xamarin.Forms.Forms.IsInitialized)
+            if (!Xamarin.Forms.Forms.IsInitialized)
             {
                 return;
             }

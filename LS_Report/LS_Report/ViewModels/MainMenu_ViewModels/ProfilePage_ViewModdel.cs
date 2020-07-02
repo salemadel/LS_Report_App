@@ -130,7 +130,7 @@ namespace LS_Report.ViewModels.MainMenu_ViewModels
             var _restService = new RESTService();
             var firstdayofmonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             var lastdayofmonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));
-            var Result = await _restService.GetStatsPeriode(firstdayofmonth, lastdayofmonth , Token.id);
+            var Result = await _restService.GetStatsPeriode(firstdayofmonth, lastdayofmonth, Token.id);
             if (Result.Item1)
             {
                 try

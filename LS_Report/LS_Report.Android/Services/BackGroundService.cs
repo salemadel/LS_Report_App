@@ -3,11 +3,9 @@ using Android.Content;
 using Android.OS;
 using Android.Support.V4.App;
 using LS_Report.Data;
-using LS_Report.Interfaces;
 using LS_Report.Services;
 using System.Threading;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 
 namespace LS_Report.Droid.Services
 {

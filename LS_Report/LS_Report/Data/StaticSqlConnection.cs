@@ -1,26 +1,23 @@
 ﻿using LS_Report.Models;
 using SQLite;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace LS_Report.Data
 {
     public static class StaticSqlConnection
     {
-        private static  SQLiteConnection _connection;
+        private static SQLiteConnection _connection;
 
         public static SQLiteConnection GetConnection()
         {
-            if(_connection == null)
+            if (_connection == null)
             {
                 var path = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "LS_Report_DB");
                 if (!File.Exists(path))
                 {
                     File.Create(path).Dispose();
                 }
-                _connection = new SQLiteConnection(path, SQLiteOpenFlags.ReadWrite| SQLiteOpenFlags.Create | SQLiteOpenFlags.FullMutex);
+                _connection = new SQLiteConnection(path, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.FullMutex);
                 _connection.CreateTable<Stored_Data_Model>();
                 _connection.CreateTable<NewContactToUpload_Model>();
                 _connection.CreateTable<EditContactToUpload_Model>();

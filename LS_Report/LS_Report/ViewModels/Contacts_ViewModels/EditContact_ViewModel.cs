@@ -6,8 +6,6 @@ using Newtonsoft.Json;
 using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
 using Plugin.Media;
-using Plugin.Permissions;
-using Plugin.Permissions.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,7 +20,7 @@ namespace LS_Report.ViewModels.Contacts_ViewModels
     {
         private INavigation Navigation { get; set; }
         private IDataStore DataStore { get; set; }
-        private PermissionsRequest Permissions { get; set; }
+        private PermissionsRequest PermissionsRequest { get; set; }
         private string[] professions = { "Chirugien dentiste", "Médecin", "Pharmacien", "Grossiste", "Sage-femme" };
         private string[] types_m = { "Bon", "Moyen", "Mauvais" };
         private string[] types_f = { "Bonne", "Moyenne", "Mauvaise" };
@@ -235,6 +233,7 @@ namespace LS_Report.ViewModels.Contacts_ViewModels
                 OnPropertyChanged();
             }
         }
+
         private Token_Model Token { get; set; }
         private string selected_Profession { get; set; }
 
@@ -261,20 +260,22 @@ namespace LS_Report.ViewModels.Contacts_ViewModels
                 }
             }
         }
+
         private string selected_Potential { get; set; }
+
         public string Selected_Potential
         {
             get { return selected_Potential; }
             set
             {
-                if(selected_Potential != value)
+                if (selected_Potential != value)
                 {
                     selected_Potential = value;
-                   if(NewContact.potential.Exists(i =>i.network == Token.network))
+                    if (NewContact.potential.Exists(i => i.network == Token.network))
                     {
                         NewContact.potential.Single(i => i.network == Token.network).value = value;
                     }
-                   else
+                    else
                     {
                         NewContact.potential.Add(new Potential { network = Token.network, value = value });
                     }
@@ -288,12 +289,12 @@ namespace LS_Report.ViewModels.Contacts_ViewModels
         public Command TakePictureCommand { get; set; }
         public Command PictureTappedCommand { get; set; }
 
-        public EditContact_ViewModel(INavigation navigation, IDataStore dataStore,Token_Model token , List<Wilaya_Model> wilayas, List<Commune> communes, List<string> specialitys, Client2 contact)
+        public EditContact_ViewModel(INavigation navigation, IDataStore dataStore, Token_Model token, List<Wilaya_Model> wilayas, List<Commune> communes, List<string> specialitys, Client2 contact)
         {
             Navigation = navigation;
             DataStore = dataStore;
             Contact = contact;
-            Permissions = new PermissionsRequest();
+            PermissionsRequest = new PermissionsRequest();
             Wilaya = wilayas;
             Speciality = specialitys;
             All_Commune = communes;
@@ -415,19 +416,15 @@ namespace LS_Report.ViewModels.Contacts_ViewModels
             Position position = null;
             try
             {
-                var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
-                if (status != PermissionStatus.Granted)
+                var status = await Xamarin.Essentials.Permissions.CheckStatusAsync<Xamarin.Essentials.Permissions.LocationWhenInUse>();
+                if (status != Xamarin.Essentials.PermissionStatus.Granted)
                 {
-                    if (await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Location))
-                    {
-                    }
+                    var results = await Xamarin.Essentials.Permissions.RequestAsync<Xamarin.Essentials.Permissions.LocationWhenInUse>();
 
-                    var results = await CrossPermissions.Current.RequestPermissionsAsync(Permission.Location);
-
-                    if (results.ContainsKey(Permission.Location))
-                        status = results[Permission.Location];
+                    if (results == Xamarin.Essentials.PermissionStatus.Granted)
+                        status = Xamarin.Essentials.PermissionStatus.Granted;
                 }
-                if (status == PermissionStatus.Granted)
+                if (status == Xamarin.Essentials.PermissionStatus.Granted)
                 {
                     var locator = CrossGeolocator.Current;
 
@@ -461,7 +458,7 @@ namespace LS_Report.ViewModels.Contacts_ViewModels
 
         private async Task ExecuteOnTakePicture()
         {
-            if (await Permissions.Check_permissions("Storage") == PermissionStatus.Granted)
+            if (await PermissionsRequest.Check_permissions("Storage") == Xamarin.Essentials.PermissionStatus.Granted)
                 try
                 {
                     await CrossMedia.Current.Initialize();

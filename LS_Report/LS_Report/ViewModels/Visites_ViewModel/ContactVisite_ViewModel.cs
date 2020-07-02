@@ -65,6 +65,7 @@ namespace LS_Report.ViewModels.Visites_ViewModel
                 OnPropertyChanged();
             }
         }
+
         public string Potential { get; set; }
         private bool IsFreeMission { get; set; } = false;
         public bool CanVisite { get; set; }
@@ -79,7 +80,8 @@ namespace LS_Report.ViewModels.Visites_ViewModel
         public Command GetHistoryCommand { get; set; }
         public Command UnvailibilityCommand { get; set; }
         public Command AddContactFocus { get; set; }
-        public ContactVisite_ViewModel(string source , INavigation navigation, IDataStore dataStore,Token_Model token , Client2 contact, bool isfreemission, bool canVisite, string global_id, string mission_id)
+
+        public ContactVisite_ViewModel(string source, INavigation navigation, IDataStore dataStore, Token_Model token, Client2 contact, bool isfreemission, bool canVisite, string global_id, string mission_id)
         {
             Source = source;
             Navigation = navigation;
@@ -92,7 +94,7 @@ namespace LS_Report.ViewModels.Visites_ViewModel
             Token = token;
 
             Potential = (Contact.potential.Exists(i => i.network == Token.network)) ? Contact.potential.Single(i => i.network == Token.network).value : null;
-            if(Source =="Focus")
+            if (Source == "Focus")
             {
                 CanVisite = false;
                 IsFocus = true;
@@ -160,16 +162,12 @@ namespace LS_Report.ViewModels.Visites_ViewModel
             {
                 if (await DependencyService.Get<IDialog>().AlertAsync("", "Le Contact n'a pas de potentiel , Vouler vous le modifier ?", "Oui", "Non"))
                 {
-                    
                     var lazem_nelgalha_hal = new ContactPage_ViewModel(Navigation);
                     await Navigation.PushModalAsync(new EditContact_View(Token, lazem_nelgalha_hal.Wilaya, lazem_nelgalha_hal.All_Commune, lazem_nelgalha_hal.Speciality, Contact));
-                    
                 }
-
             }
             else
             {
-
                 if (await DependencyService.Get<IDialog>().AlertAsync("", "Voulez Vous Ajouter le rapport ?", "Oui", "Non"))
                 {
                     var compareLocation = new CompareLocation();
@@ -245,18 +243,16 @@ namespace LS_Report.ViewModels.Visites_ViewModel
             {
                 if (await DependencyService.Get<IDialog>().AlertAsync("", "Le Contact n'a pas de potentiel , Vouler vous le modifier ?", "Oui", "Non"))
                 {
-                    
                     var lazem_nelgalha_hal = new ContactPage_ViewModel(Navigation);
-                    await Navigation.PushModalAsync(new EditContact_View(Token,lazem_nelgalha_hal.Wilaya,lazem_nelgalha_hal.All_Commune,lazem_nelgalha_hal.Speciality,Contact));
-                    
+                    await Navigation.PushModalAsync(new EditContact_View(Token, lazem_nelgalha_hal.Wilaya, lazem_nelgalha_hal.All_Commune, lazem_nelgalha_hal.Speciality, Contact));
                 }
-
             }
             else
             {
-                await Navigation.PushModalAsync(new Visite_View(Source , Contact, IsFreeMission, Global_Id, Mission_Id), true);
+                await Navigation.PushModalAsync(new Visite_View(Source, Contact, IsFreeMission, Global_Id, Mission_Id), true);
             }
         }
+
         private async Task ExecuteOnAddContactToFocus()
         {
             if (await DependencyService.Get<IDialog>().AlertAsync("", "Voulez vous Ajouter le Contact Au Focus ?", "Oui", "Non"))
@@ -265,6 +261,7 @@ namespace LS_Report.ViewModels.Visites_ViewModel
                 await Navigation.PopModalAsync();
             }
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged([CallerMemberName] string name = "")

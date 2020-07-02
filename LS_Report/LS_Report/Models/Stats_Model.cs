@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace LS_Report.Models
 {
@@ -36,6 +34,7 @@ namespace LS_Report.Models
         public int dual { get; set; }
         public List<Speciality> specialities { get; set; }
     }
+
     public class Agent
     {
         public string _id { get; set; }

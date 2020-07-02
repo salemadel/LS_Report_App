@@ -8,7 +8,7 @@ namespace LS_Report
     {
         public App()
         {
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjAzMzQyQDMxMzcyZTM0MmUzMGswQXNCTFRGMzBaQVRsNm82N3RUT3N0QmVDa0tqYWxuVy9EUWpKeFNZM2c9");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Mjc5NDMzQDMxMzgyZTMxMmUzMER2bTdGc1JRSWNqTHdHRjJCcDYraEFiMSs5WnNoUStHM2I4Q1hSdlBOYTg9");
             InitializeComponent();
             var tokenController = new TokenController();
             if (tokenController.Token_Expired())

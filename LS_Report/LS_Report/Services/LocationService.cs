@@ -14,12 +14,12 @@ namespace LS_Report.Services
     public class LocationService
     {
         private IDataStore DataStore { get; set; }
-        private PermissionsRequest permissions { get; set; }
+        private PermissionsRequest PermissionsRequest { get; set; }
 
         public LocationService(IDataStore dataStore)
         {
             DataStore = dataStore;
-            permissions = new PermissionsRequest();
+            PermissionsRequest = new PermissionsRequest();
         }
 
         public async Task GetLocationAsync()
@@ -37,7 +37,7 @@ namespace LS_Report.Services
                 {
                     try
                     {
-                        if (await permissions.Check_permissions("Location") == Plugin.Permissions.Abstractions.PermissionStatus.Granted)
+                        if (await PermissionsRequest.Check_permissions("Location") == Xamarin.Essentials.PermissionStatus.Granted)
                         {
                             var locator = CrossGeolocator.Current;
 

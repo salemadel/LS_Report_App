@@ -218,7 +218,7 @@ namespace LS_Report.ViewModels.Contacts_ViewModels
 
         private Token_Model Token { get; set; }
 
-        public Contacts_ViewModel(INavigation navigation, IDataStore dataStore,Token_Model token , string source, List<Wilaya_Model> wilayas, List<Commune> communes, List<string> specialitys)
+        public Contacts_ViewModel(INavigation navigation, IDataStore dataStore, Token_Model token, string source, List<Wilaya_Model> wilayas, List<Commune> communes, List<string> specialitys)
         {
             Navigation = navigation;
             DataStore = dataStore;
@@ -410,19 +410,19 @@ namespace LS_Report.ViewModels.Contacts_ViewModels
             IsBusy = true;
             if (Source == "Contacts_List")
             {
-                await Navigation.PushModalAsync(new ContactDetail_View(Selected_Item , Token), true);
+                await Navigation.PushModalAsync(new ContactDetail_View(Selected_Item, Token), true);
             }
             if (Source == "Edit_Contact")
             {
-                await Navigation.PushModalAsync(new EditContact_View(Token , Wilaya, All_Commune, Speciality, Selected_Item), true);
+                await Navigation.PushModalAsync(new EditContact_View(Token, Wilaya, All_Commune, Speciality, Selected_Item), true);
             }
             if (Source == "Add_Visite")
             {
-                await Navigation.PushModalAsync(new ContactVisite_Page(Source, Selected_Item,Token, true, true), true);
+                await Navigation.PushModalAsync(new ContactVisite_Page(Source, Selected_Item, Token, true, true), true);
             }
-            if(Source == "Focus")
+            if (Source == "Focus")
             {
-                await Navigation.PushModalAsync(new ContactVisite_Page(Source , Selected_Item, Token, true, true), true);
+                await Navigation.PushModalAsync(new ContactVisite_Page(Source, Selected_Item, Token, true, true), true);
             }
             IsBusy = false;
         }

@@ -20,7 +20,7 @@ namespace LS_Report.ViewModels.MainMenu_ViewModels
         private INavigation Navigation { get; set; }
         private bool IsFreeMission { get; set; } = false;
         private bool isBusy { get; set; }
-        private string[] absent = { "Congé", "Formation", "Maladie", "Manifestation", "Récupération", "Réunion" , "Focus" };
+        private string[] absent = { "Congé", "Formation", "Maladie", "Manifestation", "Récupération", "Réunion", "Focus" };
 
         public List<string> Abscence_List
         {
@@ -52,6 +52,7 @@ namespace LS_Report.ViewModels.MainMenu_ViewModels
                 OnPropertyChanged();
             }
         }
+
         private Token_Model Token { get; set; }
         public Command AddVisiteCommand { get; set; }
         public Command ProductsListCommand { get; set; }
@@ -91,7 +92,7 @@ namespace LS_Report.ViewModels.MainMenu_ViewModels
             if (IsFreeMission)
             {
                 var ContactsPage_ViewModel = new ContactPage_ViewModel(Navigation);
-                await Navigation.PushAsync(new Contatcs_View("Add_Visite",Token , ContactsPage_ViewModel.Wilaya, ContactsPage_ViewModel.All_Commune, ContactsPage_ViewModel.Speciality), true);
+                await Navigation.PushAsync(new Contatcs_View("Add_Visite", Token, ContactsPage_ViewModel.Wilaya, ContactsPage_ViewModel.All_Commune, ContactsPage_ViewModel.Speciality), true);
             }
             else
             {
@@ -179,7 +180,6 @@ namespace LS_Report.ViewModels.MainMenu_ViewModels
                     IsFreeMission = true;
                 }
                 Token = token.Item2;
-                   
             }
             else
             {

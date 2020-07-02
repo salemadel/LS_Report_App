@@ -1,6 +1,5 @@
-﻿using Plugin.Permissions;
-using Plugin.Permissions.Abstractions;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 namespace LS_Report.Data
 {
@@ -11,32 +10,25 @@ namespace LS_Report.Data
             PermissionStatus status = PermissionStatus.Unknown;
             if (type == "Location")
             {
-                status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
+                status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
                 if (status != PermissionStatus.Granted)
                 {
-                    if (await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Location))
-                    {
-                    }
+                    var results = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
 
-                    var results = await CrossPermissions.Current.RequestPermissionsAsync(Permission.Location);
-
-                    if (results.ContainsKey(Permission.Location))
-                        status = results[Permission.Location];
+                    if (results == PermissionStatus.Granted)
+                        status = PermissionStatus.Granted;
                 }
             }
             if (type == "Storage")
             {
-                status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
+                status = await Permissions.CheckStatusAsync<Permissions.StorageRead>();
+                status = (status == PermissionStatus.Granted) ? await Permissions.CheckStatusAsync<Permissions.StorageWrite>() : PermissionStatus.Denied;
                 if (status != PermissionStatus.Granted)
                 {
-                    if (await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Storage))
-                    {
-                    }
-
-                    var results = await CrossPermissions.Current.RequestPermissionsAsync(Permission.Storage);
-
-                    if (results.ContainsKey(Permission.Storage))
-                        status = results[Permission.Storage];
+                    var results = await Permissions.RequestAsync<Permissions.StorageRead>();
+                    results = (results == PermissionStatus.Granted) ? await Permissions.RequestAsync<Permissions.StorageWrite>() : PermissionStatus.Denied;
+                    if (results == PermissionStatus.Granted)
+                        status = PermissionStatus.Granted;
                 }
             }
             return status;

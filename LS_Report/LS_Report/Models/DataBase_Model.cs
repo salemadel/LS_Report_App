@@ -127,10 +127,12 @@ namespace LS_Report.Models
         public string Type { get; set; }
         public bool Read { get; set; }
     }
+
     public class QuastionnairesToUpload_Model
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
+
         public DateTime? Last_Sync { get; set; } = null;
         public string Name { get; set; }
         public DateTime Date { get; set; }

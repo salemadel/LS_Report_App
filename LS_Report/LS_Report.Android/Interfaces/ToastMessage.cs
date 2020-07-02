@@ -9,7 +9,6 @@ namespace LS_Report.Droid.Interfaces
 {
     internal class ToastMessage : IMessage
     {
-         
         public void LongAlert(string message)
         {
             if (!Xamarin.Forms.Forms.IsInitialized)

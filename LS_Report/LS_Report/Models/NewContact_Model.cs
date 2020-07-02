@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using static LS_Report.Models.Client2;
 
 namespace LS_Report.Models
 {

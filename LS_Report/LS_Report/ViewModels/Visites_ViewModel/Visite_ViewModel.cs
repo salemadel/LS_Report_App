@@ -18,7 +18,7 @@ namespace LS_Report.ViewModels.Visites_ViewModel
     {
         private INavigation Navigation { get; set; }
         private IDataStore DataStore { get; set; }
-        private string[] quality = {  "Bonne" , "Moyenne", "Mauvaise" };
+        private string[] quality = { "Bonne", "Moyenne", "Mauvaise" };
         private string[] wait_time = { "< 30 min", "30 - 60 min", "> 60 min" };
         private string[] duration = { "< 15 min", "15 - 30 min", "> 30 min" };
 
@@ -130,6 +130,7 @@ namespace LS_Report.ViewModels.Visites_ViewModel
                 OnPropertyChanged();
             }
         }
+
         private List<tmp_questionnaire> tmp_Questionnaires { get; set; }
         private bool material_delivred { get; set; }
 
@@ -200,7 +201,8 @@ namespace LS_Report.ViewModels.Visites_ViewModel
         public Command PresentedProductsListCommand { get; set; }
         public Command AddVisiteCommand { get; set; }
         public Command QuestionnaireCommand { get; set; }
-        public Visite_ViewModel(string source , INavigation navigation, IDataStore dataStore, Client2 contact, bool isfreemission, string global_id, string mission_id , List<Client2> focuscontacts = null)
+
+        public Visite_ViewModel(string source, INavigation navigation, IDataStore dataStore, Client2 contact, bool isfreemission, string global_id, string mission_id, List<Client2> focuscontacts = null)
         {
             Navigation = navigation;
             DataStore = dataStore;
@@ -209,7 +211,7 @@ namespace LS_Report.ViewModels.Visites_ViewModel
             Global_Id = global_id;
             Mission_Id = mission_id;
             Source = source;
-            if(Source == "Focus")
+            if (Source == "Focus")
             {
                 VisiteType = "Rapport Focus.";
                 Focus = true;
@@ -228,9 +230,9 @@ namespace LS_Report.ViewModels.Visites_ViewModel
             if (DataStore.GetDataStoredJson("Questionnaires").ToList().Count > 0 & Source != "Focus")
             {
                 var list = JsonConvert.DeserializeObject<List<Questionnaire_Model>>(DataStore.GetDataStoredJson("Questionnaires").ToList()[0].json);
-                foreach(var questionnaire in list)
+                foreach (var questionnaire in list)
                 {
-                    foreach(var question in questionnaire.questions)
+                    foreach (var question in questionnaire.questions)
                     {
                         var data = new tmp_questionnaire
                         {
@@ -244,7 +246,7 @@ namespace LS_Report.ViewModels.Visites_ViewModel
                     }
                 }
             }
-                Selected_Products_To_Deliver = new ObservableCollection<object>();
+            Selected_Products_To_Deliver = new ObservableCollection<object>();
 
             PresenteProductCommand = new Command(async () =>
             {
@@ -323,6 +325,7 @@ namespace LS_Report.ViewModels.Visites_ViewModel
             }
             IsBusy = false;
         }
+
         private async Task ExecuteOnQuestionnaire()
         {
             await Navigation.PushModalAsync(new Questionnaire_View(tmp_Questionnaires));
@@ -646,21 +649,21 @@ namespace LS_Report.ViewModels.Visites_ViewModel
             }
             return Product_presented_List;
         }
+
         private string SerializeQuestionnaire()
         {
-            if(tmp_Questionnaires.All(i => i.answer != null))
+            if (tmp_Questionnaires.Count > 0 & tmp_Questionnaires.All(i => i.answer != null))
             {
                 var Questionnaire_Responce = new List<Questionnaire_Responce_Model>();
-                
-                foreach(var questionnaire in tmp_Questionnaires)
+
+                foreach (var questionnaire in tmp_Questionnaires)
                 {
-                    
-                    if(!Questionnaire_Responce.Exists(i => i.questionnaire == questionnaire.id_questionnaire))
+                    if (!Questionnaire_Responce.Exists(i => i.questionnaire == questionnaire.id_questionnaire))
                     {
                         var data = new Questionnaire_Responce_Model
                         {
-                             questionnaire = questionnaire.id_questionnaire,
-                             client = Contact._id
+                            questionnaire = questionnaire.id_questionnaire,
+                            client = Contact._id
                         };
                         Questionnaire_Responce.Add(data);
                     }
@@ -676,6 +679,7 @@ namespace LS_Report.ViewModels.Visites_ViewModel
                 return null;
             }
         }
+
         private bool CheckRequiredData()
         {
             if (Selected_Authority == null | Selected_Duration == null | Selected_Quality == null | Selected_Receptivity == null | Selected_Wait_Time == null)

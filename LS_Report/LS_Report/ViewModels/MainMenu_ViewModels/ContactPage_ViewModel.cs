@@ -85,21 +85,18 @@ namespace LS_Report.ViewModels.MainMenu_ViewModels
         private async Task ExecuteOnEditContactTapped()
         {
             IsBusy = true;
-            await Navigation.PushAsync(new Contatcs_View("Edit_Contact",Token, Wilaya, All_Commune, Speciality), true);
+            await Navigation.PushAsync(new Contatcs_View("Edit_Contact", Token, Wilaya, All_Commune, Speciality), true);
             IsBusy = false;
         }
 
         private void GetDataFromJsonFiles()
         {
-
             IsBusy = true;
             var _tokenController = new TokenController();
             var token = _tokenController.DecodeToken();
             if (token.Item1)
             {
-
                 Token = token.Item2;
-
             }
             else
             {
@@ -132,7 +129,7 @@ namespace LS_Report.ViewModels.MainMenu_ViewModels
                 var json = reader.ReadToEnd();
                 Speciality = JsonConvert.DeserializeObject<List<string>>(json);
             }
-           
+
             IsBusy = false;
         }
 

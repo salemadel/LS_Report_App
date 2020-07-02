@@ -3,33 +3,27 @@ using LS_Report.Models;
 using SQLite;
 using System;
 using System.Collections.Generic;
-using System.IO;
 
 namespace LS_Report.Data
 {
-    public  class DataStore : IDataStore
+    public class DataStore : IDataStore
     {
         private SQLiteConnection _connection;
 
         public DataStore()
         {
-
-                _connection = StaticSqlConnection.GetConnection();
-               
+            _connection = StaticSqlConnection.GetConnection();
         }
-        
 
         public IEnumerable<Stored_Data_Model> GetDataStoredJson(string type)
         {
-           
-                return _connection.Query<Stored_Data_Model>("Select * From Stored_Data_Model Where Type = ?", type);
-            
+            return _connection.Query<Stored_Data_Model>("Select * From Stored_Data_Model Where Type = ?", type);
         }
 
         public void AddData(Stored_Data_Model data)
         {
-            if(_connection != null)
-            _connection.Insert(data);
+            if (_connection != null)
+                _connection.Insert(data);
         }
 
         public void UpdateData(string type, string json)
@@ -148,8 +142,7 @@ namespace LS_Report.Data
 
         public IEnumerable<Mails_Model> GetMails()
         {
-            
-                return _connection.Table<Mails_Model>();
+            return _connection.Table<Mails_Model>();
         }
 
         public void AddMails(Mails_Model data)
@@ -163,9 +156,9 @@ namespace LS_Report.Data
             if (_connection != null)
                 _connection.Execute("Update Mails_Model Set Json = ? Where Id = ?", Json, id);
         }
+
         public IEnumerable<QuastionnairesToUpload_Model> GetQuastionnairesToUpload()
         {
-
             return _connection.Table<QuastionnairesToUpload_Model>();
         }
 
@@ -180,6 +173,7 @@ namespace LS_Report.Data
             if (_connection != null)
                 _connection.Execute("Update QuastionnairesToUpload_Model Set Last_Error = ? , Last_Sync = ? Where Id = ?", error, DateTime.Now, id);
         }
+
         public void DeleteQuestionnaireToUpload(int id)
         {
             if (_connection != null)
